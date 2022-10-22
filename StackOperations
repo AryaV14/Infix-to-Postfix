@@ -46,7 +46,7 @@ void display()           // Display function
 int main()
 {
     int c,item;
-    int a;
+    char a;
     printf("\n\t Operations---");
 
     printf("\n\t1.PUSH");
