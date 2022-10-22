@@ -1,0 +1,76 @@
+#include<stdio.h>
+
+
+#define max 5
+int stack[max];
+int top;
+
+void push(int x)           // PUSH function
+{
+    if(top>=max)
+        printf("Stack is OVERTFLOW\n");
+    else
+    {
+        stack[top]=x;
+        top++;
+    }
+}
+
+int pop()           // POP function
+{
+    if(top<=0)
+        printf("Stack is UNDERFLOW\n");
+    else
+    {
+        top++;
+        x=stack[top];
+    }
+    return x;
+}
+
+void display()           // Display function
+{
+    int i;
+    i=top-1;
+    if(top<=0)
+        printf("Stack is Empty\n");
+    else
+        printf("The Elements in Stack are \n");
+    while(i>=0)
+    {
+        printf(" %d\n",stack[i--]);
+    }
+}
+
+
+int main()
+{
+    int c,item;
+    int a;
+    printf("\n\t Operations---");
+
+    printf("\n\t1.PUSH");
+    printf("\n\t2.POP");
+
+    do{
+        printf("\n\t Enter Your Choice: ");
+        scanf("%d",&c);
+        switch(c)
+        {
+        case 1:printf("Enter an Element to PUSH: \n");
+                scanf("%d",&item);
+                push(item);
+                display();
+                break;
+        case 2:x=pop();
+                printf("The element POP out from Stack is %d\n",x);
+                display();
+                break;
+        
+        default:printf("INVALID Choice\n");
+        }
+        printf("\n Do u want to continue y/n: ");
+        scanf(" %c",&a);
+    }while((a=='y')||(a=='Y'));
+    
+}
