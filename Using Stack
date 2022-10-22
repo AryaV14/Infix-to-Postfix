@@ -1,0 +1,119 @@
+#include<stdio.h>
+#include<string.h>
+
+#define max 20
+char stack[max];
+char P[20];
+int top=0, x;
+
+void push(char x)           // PUSH function
+{
+    if(top>=max)
+        printf("Stack is OVERTFLOW\n");
+    else
+    {
+        stack[top]=x;
+        top++;
+    }
+}
+
+int pop()           // POP function
+{
+    if(top<=0)
+        printf("Stack is UNDERFLOW\n");
+    else
+    {
+        top--;
+        x=stack[top];
+
+    }
+    return x;
+}
+
+int precedence(char a)
+{
+    switch(a)
+    {
+        case '+': 
+        case '-': return 2;
+        case '*': 
+        case '/': return 3;
+        case '^': return 4;
+        case '(': return 1;
+        
+    }
+}
+void postfix(char A[])
+{
+    int l,i,j=0;
+    l=strlen(A);
+    A[l]=')';
+    l=l+1;
+    A[l]='\0';
+    stack[top]='(';
+    top++;
+
+    for(i=0;i<l;i++)
+      {  if(97<=A[i]&&A[i]<=122)
+            P[j++]=A[i];
+        else if(A[i]=='(')
+            push(A[i]);
+        else if(A[i]==')')
+               { while(stack[top-1]!='(')
+                {
+                    P[j++]=pop();
+                }
+                pop();
+               }
+        else if(A[i]=='+'||A[i]=='-'||A[i]=='*'||A[i]=='/'||A[i]=='^')
+           if(precedence(A[i])>precedence(stack[top-1]))
+                push(A[i]);
+       else {while(precedence(A[i])<=precedence(stack[top-1]))
+                    P[j++]=pop();
+                    push(A[i]);}
+                
+      } 
+      P[j]='\0';     
+    printf("%s\n",P);
+
+    i=top-1;
+    while(i>=0)
+    {
+        printf(" %c\n",stack[i--]);
+    }
+
+                
+                
+}
+
+void evaluate(char A[]);
+
+int main()
+{   int c,res;
+    char Q[20],a;
+    printf("Operations---\n");
+    printf("\t1.Convert infix expression to postfix expression\n");
+    printf("\t2.Evaluate the postfix expression\n");
+    printf("\t3.Type any number to exit\n");
+    do{
+         printf("Enter your choice: ");
+        scanf("%d",&c);
+        if(c==1)
+        {  
+            printf("Enter the expression: ");
+            scanf("%s",Q);
+            postfix(Q);
+        }
+        else if(c==2)
+        {
+            printf("Enter the expression: ");
+            scanf("%s",Q);
+            
+            
+            //evaluate(Q);
+        }
+
+        printf("Do you want to coutinue y/n: ");
+        scanf("%s",&a);
+    }while(a=='y'||a=='Y');
+}
