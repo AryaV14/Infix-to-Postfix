@@ -22,7 +22,7 @@ int pop()           // POP function
         printf("Stack is UNDERFLOW\n");
     else
     {
-        top++;
+        top--;
         x=stack[top];
     }
     return x;
