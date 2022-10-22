@@ -3,7 +3,7 @@
 
 #define max 5
 int stack[max];
-int top;
+int top=0;
 
 void push(int x)           // PUSH function
 {
